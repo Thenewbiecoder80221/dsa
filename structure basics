@@ -1,0 +1,14 @@
+//defining a structure and then using it 
+#include<bits/stdc++.h>
+using namespace std;
+//definition of the structure 
+struct rectangle{
+    int length;
+    int breadth;
+};
+int main(){
+    struct rectangle r1;//using structure variable
+    r1={10,5};//initiating values
+    cout<<sizeof(r1)<<endl;
+    cout<<r1.length<<endl<<r1.breadth;
+}
