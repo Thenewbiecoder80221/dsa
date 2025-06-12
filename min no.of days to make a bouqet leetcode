@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int max_element (vector<int> &v){
+        int n=v.size();
+        int maxi=INT_MIN;
+        for(int i=0;i<n;i++){
+            maxi=max(v[i],maxi);
+        }
+        return maxi;
+    }
+    int min_element(vector<int>&v){
+        int n=v.size();
+        int mini=INT_MAX;
+        for(int i=0;i<n;i++){
+            mini=min(v[i],mini);
+        }
+        return mini;
+    }
+    bool possible(vector<int> &v,int day,int m,int k){
+        int n=v.size();
+        int count=0;
+        int no_ofb=0;
+        for(int i=0;i<n;i++){
+            if(v[i]<=day){
+                count++;
+            }
+            else{
+                no_ofb=no_ofb+(count/k);
+                count=0;
+            }
+        }
+        no_ofb+=count/k;
+        return no_ofb>=m;
+    
+    }
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        if((long long) m* (long long)k > bloomDay.size() ){
+            return -1;
+        }
+        int low,high;
+        low=min_element(bloomDay);
+        high=max_element(bloomDay);
+        int mid;
+        while(low<=high){
+            mid=low+(high-low)/2;
+            if(possible(bloomDay,mid,m,k)){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+};
