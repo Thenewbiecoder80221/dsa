@@ -1,0 +1,54 @@
+class Solution {
+public:
+    int max_element(vector<int> v){
+        int maxi,n;
+        maxi=INT_MIN;
+        n=v.size();
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,v[i]);
+        }
+        return maxi;
+    }
+    int sumofele(vector<int>v){
+        int n=v.size();
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum=sum+v[i];
+        }
+        return sum;
+    }
+    int noof_days(vector<int>v,int cap){
+        int load=0;
+        int day=1;
+        int n=v.size();
+        for(int i=0;i<n;i++){
+            if(load+v[i]>cap){
+                day=day+1;
+                load=v[i];
+            }
+            else{
+                load=load+v[i];
+            }
+        }
+        return day;
+    }
+    int shipWithinDays(vector<int>& weights, int days) {
+        int low,mid,high;
+        int result;
+        low=max_element(weights);
+        high=sumofele(weights);
+        while(low<=high){
+            mid=low+(high-low)/2;
+            result=noof_days(weights,mid);
+            if(result<=days){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+
+        }
+        return low;
+        
+    }
+};
