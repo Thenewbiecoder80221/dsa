@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int max_element(vector<int> v){
+        int maxi=INT_MIN;
+        int n=v.size();
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,v[i]);
+        }
+        return maxi;
+    }
+    int sumbyd(vector<int>v,int number){
+        int n=v.size();
+        int sumi=0;
+        for(int i=0;i<n;i++){
+            sumi=sumi+ceil((double)v[i]/(double)number);
+        }
+        return sumi;
+    }
+    int smallestDivisor(vector<int>& nums, int threshold) {
+        int n=nums.size();
+        if(n>threshold){
+            return -1;
+        }
+        int low,high;
+        int mid,result;
+        low=1;
+        high=max_element(nums);
+        while(low<=high){
+            mid=low+(high-low)/2;
+            result=sumbyd(nums,mid);
+            if(result<=threshold){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return  low;
+    }
+};
